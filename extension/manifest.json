@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "I remember when all this was fields",
+  "version": "1.0",
+
+  "description": "Fields, just fields.",
+
+  "icons": {
+    "48": "icons/fields-48.png"
+  },
+
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "dns",
+    "notifications",
+    "<all_urls>"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
