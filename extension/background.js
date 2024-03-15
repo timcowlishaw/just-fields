@@ -94,21 +94,17 @@ const aws_eu_south_2_cidrs = [
 //  Adapted from https://medium.com/geekculture/what-i-built-3-browser-extension-for-intercept-and-detect-requests-country-of-ip-address-5fa843186097
 
 async function logURL(requestDetails) {
-  console.log("in logURL - allfields");
   const hostname = new URL(requestDetails.url).hostname;
   const ip = await browser.dns.resolve(hostname);
-  console.log("IP", ip.addresses, "-allfields");
 
   ip4s = ip.addresses.filter((ip) => ipv4_regex.test(ip));
 
-  console.log("ip4s", ip4s, "-allfields");
-
   if (ip4s.some((ip) => isIp4InCidrs(ip, aws_eu_south_2_cidrs))) {
-    console.log("MATCHED! AWS ZARAGOZA - allfields");
-    browser.runtime.sendMessage({ message: "aws_zaragoza" });
+    return {
+      redirectUrl: `https://example.com/fields/?url=${requestDetails.url}`,
+    };
   }
 }
-console.log("registering listener - allfields");
 
 browser.webRequest.onBeforeRequest.addListener(
   logURL,
