@@ -101,7 +101,7 @@ async function logURL(requestDetails) {
 
   if (ip4s.some((ip) => isIp4InCidrs(ip, aws_eu_south_2_cidrs))) {
     return {
-      redirectUrl: `https://example.com/fields/?url=${requestDetails.url}`,
+      redirectUrl: `https://just-fields.timcowlishaw.co.uk/?url=${requestDetails.url}`,
     };
   }
 }
